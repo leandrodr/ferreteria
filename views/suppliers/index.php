@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\SuppliersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Suppliers';
+$this->title = 'Proveedores';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="suppliers-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Suppliers', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear Proveedor', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,10 +26,29 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'person_id',
             'company_name',
             'account_number',
-            'deleted',
+            [
+                'attribute' => 'nombres',
+                'value' => 'person.first_name'
+            ],
+            [
+                'attribute' => 'apellidos',
+                'value' => 'person.last_name'
+            ],
+            [
+                'attribute' => 'celular',
+                'value' => 'person.phone_number'
+            ],
+            [
+                'attribute' => 'email',
+                'value' => 'person.email'
+            ],
+            [
+                'attribute' => 'direccion',
+                'value' => 'person.address_1'
+            ],
+
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

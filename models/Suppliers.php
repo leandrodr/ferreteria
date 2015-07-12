@@ -33,10 +33,11 @@ class Suppliers extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'company_name'], 'required'],
+            
+            ['company_name' , 'required' ,'message' => 'Empresa no puede ser vacio'],
             [['id', 'deleted'], 'integer'],
             [['company_name', 'account_number'], 'string', 'max' => 255],
-            [['account_number'], 'unique']
+            [['account_number'], 'unique' , 'message' => 'C.I ya existe, ingrese otro por favor']
         ];
     }
 
@@ -48,8 +49,8 @@ class Suppliers extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'person_id' => 'Person ID',
-            'company_name' => 'Company Name',
-            'account_number' => 'Account Number',
+            'company_name' => 'Empresa',
+            'account_number' => 'Carnet Identidad',
             'deleted' => 'Deleted',
         ];
     }

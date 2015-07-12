@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Suppliers;
 use app\models\SuppliersSearch;
+use app\models\People;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -61,14 +62,24 @@ class SuppliersController extends Controller
     public function actionCreate()
     {
         $model = new Suppliers();
+        $person = new People();
+        $postData= Yii::$app->request->post();
+        if($model->load($postData) && $person->load($postData) && $model->validate() && $person->validate() ){
+            if ($person->save(true)) {
+                $model->person_id = $person->person_id;
+                //if($model->account_number == "")
+                    //$model->account_number= NULL;
+                                if ($model->save(true)){
+                                    return $this->redirect(['index']);
+                }
+            }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        }
             return $this->render('create', [
                 'model' => $model,
+                'person' => $person,
             ]);
-        }
+        
     }
 
     /**
@@ -80,8 +91,10 @@ class SuppliersController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        
+            
+        if ($model->load(Yii::$app->request->post()) && $model->save() && $model->person->load(Yii::$app->request->post()) && $model->person->save()) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

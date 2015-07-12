@@ -41,8 +41,12 @@ class People extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'phone_number', 'email', 'address_1', 'address_2', 'city', 'state', 'zip', 'country', 'comments'], 'required'],
+            [['email'], 'email','message' => 'Ingrese un email valido'],
+            [['email'], 'unique','message' => 'El email ya existe, intente con otro'],
+            [['first_name'] , 'required' , 'message' => 'Nombres no puede ser vacio'],
             [['comments'], 'string'],
+            [['phone_number'], 'integer','message' => 'Celular debe ser solo numeros'],
+            
             [['first_name', 'last_name', 'phone_number', 'email', 'address_1', 'address_2', 'city', 'state', 'zip', 'country'], 'string', 'max' => 255]
         ];
     }
@@ -53,11 +57,11 @@ class People extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'first_name' => 'First Name',
-            'last_name' => 'Last Name',
-            'phone_number' => 'Phone Number',
+            'first_name' => 'Nombres',
+            'last_name' => 'Apellidos',
+            'phone_number' => 'Celular',
             'email' => 'Email',
-            'address_1' => 'Address 1',
+            'address_1' => 'Direccion',
             'address_2' => 'Address 2',
             'city' => 'City',
             'state' => 'State',

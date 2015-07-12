@@ -9,19 +9,25 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="suppliers-form">
-
+	
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id')->textInput() ?>
+    <?= $form->field($model, 'company_name')->textInput(['maxlength' => true])->label('Empresa') ?>
 
-    <?= $form->field($model, 'company_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'account_number')->textInput(['maxlength' => true])->label('Carnet Identidad') ?>
 
-    <?= $form->field($model, 'account_number')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($person, 'first_name')->textInput()->label('Nombres') ?>
 
-    <?= $form->field($model, 'deleted')->textInput() ?>
+    <?= $form->field($person, 'last_name')->textInput()->label('Apellidos') ?>
+
+    <?= $form->field($person, 'phone_number')->textInput()->label('Celular') ?>
+
+    <?= $form->field($person, 'email')->textInput() ?>
+
+    <?= $form->field($person, 'address_1')->textInput()->label('Direccion') ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
